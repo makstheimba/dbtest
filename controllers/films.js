@@ -11,7 +11,5 @@ module.exports.createFilm = (req, res) => {
 
   Film.create({ title, genre })
     .then(film => res.send({ data: film }))
-    .catch((err) => {
-      res.status(500).send({ message: err });
-    });
+    .catch(() => res.status(500).send({ message: 'Произошла ошибка' }));
 };

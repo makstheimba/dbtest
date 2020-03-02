@@ -10,6 +10,14 @@
       height: 100%;
     }
 
+    input {
+      margin: 5px;
+    }
+
+    input:invalid {
+      box-shadow: 0px 0px 1px 1px red;
+    }
+
     p {
       font-family: sans-serif;
       font-size: 30px;
@@ -20,7 +28,19 @@
 </head>
 <body>
   <div class="container">
-    <p>В этом задании нет фронтенда. Для тестирования используйте Postman. Ссылка на сервер в&nbsp;терминале.</p>
+    <form action="http://localhost:3000/films" method="POST">
+      <ul>
+        <li>
+          <label for="title">Title:&nbsp;&nbsp;</label>
+          <input type="text" id="title" name="title" required minlength="2" maxlength="30">
+        </li>
+        <li>
+          <label for="genre">Genre:</label>
+          <input type="text" id="genre" name="genre" required pattern="комедия|драма|боевик|триллер|документальный'">
+        </li>
+       </ul>
+      <button type="submit">Create film</button>
+    </form>
   </div>
 </body>
 </html>
