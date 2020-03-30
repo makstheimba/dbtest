@@ -11,5 +11,17 @@ module.exports.createFilm = (req, res) => {
 
   Film.create({ title, genre })
     .then(film => res.send({ data: film }))
-    .catch(() => res.status(500).send({ message: 'Произошла ошибка' }));
+    .catch((err) => res.status(500).send({ err }));
 };
+
+module.exports.likeFilm = (req, res) => {
+  const { filmId, userId} = req.body;
+  console.log(filmId, userId);
+  Film.findByIdAndUpdate(
+    req.body.filmId,
+    { $addToSet: { likes: req.body.userId }},
+    { new: true }
+  ).orFail(() => {console.log('in fail')}).then(film => {
+    res.send({ data: film })
+  }).catch((err) => res.status(500).send({ err}))
+}

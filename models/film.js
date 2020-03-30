@@ -11,6 +11,9 @@ const filmSchema = new mongoose.Schema({
     type: String,
     enum: ['комедия', 'драма', 'боевик', 'триллер', 'документальный'],
     required: true
+  },
+  likes: {
+    type: [String]
   }
 });
 
