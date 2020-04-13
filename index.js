@@ -11,7 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/mydb', {
+mongoose.connect('mongodb://localhost:27017/mydb', { // 'mongodb://host.docker.internal:27017/mydb'
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false
