@@ -1,9 +1,10 @@
 const Film = require('../models/film');
+const InternalError = require('../helpers/errors/InternalError');
 
-module.exports.getFilms = (req, res) => {
+module.exports.getFilms = (req, res, next) => {
     Film.find({})
         .then(films => res.send({ data: films }))
-        .catch(() => res.status(500).send({ message: 'Произошла ошибка' }));
+        .catch(() => next(new InternalError()));
 };
 
 module.exports.createFilm = (req, res) => {
@@ -11,7 +12,7 @@ module.exports.createFilm = (req, res) => {
 
   Film.create({ title, genre })
     .then(film => res.send({ data: film }))
-    .catch((err) => res.status(500).send({ err }));
+    .catch(() => next(new InternalError()));
 };
 
 module.exports.likeFilm = (req, res) => {
@@ -23,5 +24,6 @@ module.exports.likeFilm = (req, res) => {
     { new: true }
   ).orFail(() => {console.log('in fail')}).then(film => {
     res.send({ data: film })
-  }).catch((err) => res.status(500).send({ err}))
+  })
+  .catch(() => next(new InternalError()));
 }
