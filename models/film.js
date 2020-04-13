@@ -6,6 +6,14 @@ const filmSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
     required: true
+    // select: false
+/*
+user = {
+  email: '1@yandex.ru',
+  password: '12345',
+  name: 'Vasia'
+}
+*/
   },
   genre: {
     type: String,
