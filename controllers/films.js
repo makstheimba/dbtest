@@ -7,7 +7,7 @@ module.exports.getFilms = (req, res, next) => {
         .catch(() => next(new InternalError()));
 };
 
-module.exports.createFilm = (req, res) => {
+module.exports.createFilm = (req, res, next) => {
   const { title, genre } = req.body;
 
   Film.create({ title, genre })
@@ -15,7 +15,7 @@ module.exports.createFilm = (req, res) => {
     .catch(() => next(new InternalError()));
 };
 
-module.exports.likeFilm = (req, res) => {
+module.exports.likeFilm = (req, res, next) => {
   const { filmId, userId} = req.body;
   console.log(filmId, userId);
   Film.findByIdAndUpdate(
